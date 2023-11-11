@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.GoodsMapper">
+
+    <resultMap id="goodsMapper" type="com.tencent.wxcloudrun.model.Goods">
+        <id property="GID" column="GID"/>
+        <result property="description" column="Gdes"/>
+        <result property="campus" column="Gcampus"/>
+        <result property="createTime" column="GcreateTime" javaType="java.time.LocalDateTime"  />
+        <result property="updateTime" column="GupdateTime" javaType="java.time.LocalDateTime"  />
+        <result property="status" column="Status"/>
+        <result property="category" column="Gcategory"/>
+        <result property="UID" column="UID"/>
+        <result property="price" column="Gprice"/>
+    </resultMap>
+
+    <select id="getGoods" resultMap="GoodsMapper" parameterType="java.lang.Integer">
+        SELECT `GID`, `Gdes`, `Gcampus`, `GcreateTime`, `GupdateTime`, `Gstatus`, `Gcategory`, `UID`, `Gprice`
+        FROM Goods
+        WHERE GID = #{GID}
+    </select>
+
+    <delete id="clearGoods" parameterType="java.lang.Integer">
+        DELETE
+        FROM Goods
+        where GID = #{GID}
+        limit 1
+    </delete>
+
+    <update id="upsertGoods" parameterType="com.tencent.wxcloudrun.model.Goods">
+        INSERT INTO `Counters`(`GID`, `goods`)
+            VALUE(#{GID}, #{goods})
+        ON DUPLICATE KEY UPDATE goods=#{goods}
+    </update>
+
+</mapper>

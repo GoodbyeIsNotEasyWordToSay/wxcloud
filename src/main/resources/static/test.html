@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script type="text/javascript">
+        function getGoods(){
+            $.ajax("/api/goods/1"+ {
+                method: "get",
+            }).done(function (res) {
+                if (res && res.data !== undefined) {
+                    $(".detail").html(res.data);
+
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<form>
+    <span>输入gid</span><input id="inputGid" type="text">
+    <input type="button" value="返回商品详情" onclick="getGoods()"><br>
+    <span>商品详情</span><textarea id="detail"></textarea>
+</form>
+</body>
+</html>

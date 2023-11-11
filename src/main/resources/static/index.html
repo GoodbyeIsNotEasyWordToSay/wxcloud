@@ -265,6 +265,11 @@
         </div>
       </div>
     </div>
+    <form>
+      <span>输入gid:</span><input id="inputGid" type="text">
+      <input type="button" value="返回商品详情" onclick="getGoods()"><br>
+      <span>商品详情:</span><span class="detail"></span>
+    </form>
   </div>
 </body>
 <script src="https://mat1.gtimg.com/www/asset/lib/jquery/jquery/jquery-1.11.1.min.js"></script>
@@ -292,6 +297,17 @@
     }).done(function (res) {
       if (res && res.data !== undefined) {
         $(".count-number").html(res.data);
+      }
+    });
+  }
+
+  function getGoods(){
+    let url = "/api/goods/" + document.getElementById("inputGid").value;
+    $.ajax(url+ {
+      method: "get",
+    }).done(function (res) {
+      if (res && res.data !== undefined) {
+        $(".detail").html(res.data);
       }
     });
   }
