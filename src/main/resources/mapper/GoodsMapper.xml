@@ -16,21 +16,8 @@
 
     <select id="getGoods" resultMap="GoodsMapper" parameterType="java.lang.Integer">
         SELECT `GID`, `Gdes`, `Gcampus`, `GcreateTime`, `GupdateTime`, `Gstatus`, `Gcategory`, `UID`, `Gprice`
-        FROM Goods
+        FROM goods
         WHERE GID = #{GID}
     </select>
-
-    <delete id="clearGoods" parameterType="java.lang.Integer">
-        DELETE
-        FROM Goods
-        where GID = #{GID}
-        limit 1
-    </delete>
-
-    <update id="upsertGoods" parameterType="com.tencent.wxcloudrun.model.Goods">
-        INSERT INTO `Counters`(`GID`, `goods`)
-            VALUE(#{GID}, #{goods})
-        ON DUPLICATE KEY UPDATE goods=#{goods}
-    </update>
 
 </mapper>
