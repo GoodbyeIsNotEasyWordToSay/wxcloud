@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tencent.wxcloudrun.dao.GoodsMapper">
 
-    <resultMap id="goodsMapper" type="com.tencent.wxcloudrun.model.Goods">
+    <resultMap id="GoodsMapper" type="com.tencent.wxcloudrun.model.Goods">
         <id property="GID" column="GID"/>
-        <result property="description" column="Gdes"/>
-        <result property="campus" column="Gcampus"/>
-        <result property="createTime" column="GcreateTime" javaType="java.time.LocalDateTime"  />
-        <result property="updateTime" column="GupdateTime" javaType="java.time.LocalDateTime"  />
-        <result property="status" column="Status"/>
-        <result property="category" column="Gcategory"/>
+        <result property="Gdes" column="Gdes"/>
+        <result property="Gcampus" column="Gcampus"/>
+        <result property="Gcreatetime" column="Gcreatetime" javaType="java.time.LocalDateTime"  />
+        <result property="Gupdatetime" column="Gupdatetime" javaType="java.time.LocalDateTime"  />
+        <result property="Status" column="Status"/>
+        <result property="Gcategory" column="Gcategory"/>
         <result property="UID" column="UID"/>
-        <result property="price" column="Gprice"/>
+        <result property="Gprice" column="Gprice"/>
     </resultMap>
 
     <select id="getGoods" resultMap="GoodsMapper" parameterType="java.lang.Integer">
-        SELECT `GID`, `Gdes`, `Gcampus`, `GcreateTime`, `GupdateTime`, `Gstatus`, `Gcategory`, `UID`, `Gprice`
+        SELECT `GID`, `Gdes`, `Gcampus`, `Gcreatetime`, `Gupdatetime`, `Status`, `Gcategory`, `UID`, `Gprice`
         FROM goods
         WHERE GID = #{GID}
     </select>

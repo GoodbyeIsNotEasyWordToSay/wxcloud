@@ -7,21 +7,21 @@ import java.time.LocalDateTime;
 
 @Data
 public class Goods implements Serializable{
-    private int GID;
+    private Integer GID;
 
-    private String description;
+    private String Gdes;
 
-    private int campus;
+    private Integer Gcampus;
 
-    private LocalDateTime createTime;
+    private LocalDateTime Gcreatetime;
 
-    private LocalDateTime updateTime;
+    private LocalDateTime Gupdatetime;
 
-    private int status;
+    private Integer Status;
 
-    private int category;
+    private Integer Gcategory;
 
-    private String UID;
+    private Integer UID;
 
-    private float price;
+    private Float Gprice;
 }

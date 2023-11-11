@@ -21,9 +21,9 @@ public class DetailController {
 
     @GetMapping("/api/goods/{gid}")
     public ApiResponse getDetails(int gid) {
-        Optional<Goods> Details = detailService.getGoodsDetail(gid);
-        if (Details != null) {
-            return ApiResponse.ok(Details); // 如果成功获取到商品详情，则返回成功的响应
+        Optional<Goods> details = detailService.getGoodsDetail(gid);
+        if (details.isPresent()) {
+            return ApiResponse.ok(details); // 如果成功获取到商品详情，则返回成功的响应
         } else {
             return ApiResponse.error("Product details not found for GID: " + gid); // 商品详情未找到的错误响应
         }
