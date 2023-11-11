@@ -6,6 +6,7 @@ import com.tencent.wxcloudrun.service.DetailService;
 import com.tencent.wxcloudrun.config.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
@@ -20,7 +21,7 @@ public class DetailController {
     }
 
     @GetMapping("/api/goods/{gid}")
-    public ApiResponse getDetails(int gid) {
+    public ApiResponse getDetails(@PathVariable Integer gid) {
         Optional<Goods> details = detailService.getGoodsDetail(gid);
         if (details.isPresent()) {
             return ApiResponse.ok(details); // 如果成功获取到商品详情，则返回成功的响应
