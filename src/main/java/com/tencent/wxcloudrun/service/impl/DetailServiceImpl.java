@@ -18,7 +18,7 @@ public class DetailServiceImpl implements DetailService {
     }
 
     @Override
-    public Optional<Goods> getGoodsDetail(int gid) {
+    public Optional<Goods> getGoodsDetail(Integer gid) {
         return Optional.ofNullable(goodsMapper.getGoods(gid));
     }
 }
