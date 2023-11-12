@@ -14,7 +14,7 @@ public interface GoodsMapper {
     ArrayList<Good> getGoods(@Param("keyword") String keyword);
 
     @Select("select * from goods where Gcategory = #{Gcategory} and Status = 1")
-    ArrayList<Good> getSellingGoods(@Param("Gcatefory") int Gcategory);
+    ArrayList<Good> getSellingGoods(@Param("Gcategory") int Gcategory);
 
     @Select("select * from goods_image where GID = #{GID}")
     ArrayList<GoodsImage> getgoodimage(@Param("GID") int gid);
