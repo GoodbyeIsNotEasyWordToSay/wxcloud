@@ -4,9 +4,10 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @Data
-public class Goods implements Serializable{
+public class Good implements Serializable{
     private Integer GID;
 
     private String Gdes;
@@ -24,4 +25,7 @@ public class Goods implements Serializable{
     private Integer UID;
 
     private Float Gprice;
+
+    private ArrayList<GoodsImage> goodsImageList;
+
 }
