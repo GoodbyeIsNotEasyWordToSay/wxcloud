@@ -22,7 +22,7 @@ public interface GoodsMapper {
     @Select("select * from goods_image where GID = #{GID}")
     ArrayList<GoodsImage> getgoodimage(@Param("GID") int gid);
 
-    @Insert("insert into goods(Gdes, Gprice, Gcampus, Status, Gcategory, UID) values (#{Gdes}, #{Gprice}, #{Gcampus}, #{Gstatus}, #{Gcategory}, #{UID})")
+    @Insert("insert into goods(Gdes, Gprice, Gcampus, Status, Gcategory, UID) values (#{Gdes}, #{Gprice}, #{Gcampus}, #{Status}, #{Gcategory}, #{UID})")
     @Options(useGeneratedKeys = true, keyProperty = "GID", keyColumn = "GID")
     void insertGood(Good good);
 
