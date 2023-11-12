@@ -8,5 +8,5 @@ import java.time.LocalDateTime;
 
 @Data
 public class IdleItem extends Good {
-    private LocalDateTime endtime;
+    protected LocalDateTime endtime;
 }
