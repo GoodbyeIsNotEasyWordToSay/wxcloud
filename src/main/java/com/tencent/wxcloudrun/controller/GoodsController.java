@@ -35,6 +35,7 @@ public class GoodsController {
         }
     }
 
+    //@RequestBody解析json注入对象这一过程对对象的属性名命名十分严格，建议改成全部小写并以下划线分隔单词（前两个字母不能1小2大）
     @PostMapping("/api/goods/release")
     ApiResponse create(@RequestBody ReleaseRequest request){
         logger.info("/api/goods/release POST request");
