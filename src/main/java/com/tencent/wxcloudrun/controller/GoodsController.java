@@ -78,4 +78,11 @@ public class GoodsController {
             }
         }
     }
+
+    @PostMapping("/api/goods/test")
+    ApiResponse create(@RequestBody String jsonString){
+        logger.info("/api/goods/test POST request");
+        logger.info(jsonString);
+        return ApiResponse.ok();
+    }
 }
