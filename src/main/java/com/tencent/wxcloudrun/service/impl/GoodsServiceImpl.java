@@ -27,7 +27,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public Optional<Good> getGoodsDetail(Integer gid) {
         Good good = goodsMapper.getGood(gid);
-        good.setGoodsImageList(goodsMapper.getgoodimage(gid));
+        good.setGoodsImageList(goodsMapper.getGoodImage(gid));
         return Optional.of(good);
     }
 
@@ -36,10 +36,12 @@ public class GoodsServiceImpl implements GoodsService {
         try {
             goodsMapper.insertGood(idleItem);
             goodsMapper.insertIdleItem(idleItem);
+            Integer gid = idleItem.getGID();
             ArrayList<GoodsImage> goodsImages = idleItem.getGoodsImageList();
             for (GoodsImage x:
                  goodsImages) {
-                    imageMapper.insertGoodImage(x);
+                x.setG_id(gid);
+                imageMapper.insertGoodImage(x);
             }
         }
         catch (Exception e) {
@@ -53,9 +55,11 @@ public class GoodsServiceImpl implements GoodsService {
         try{
             goodsMapper.insertGood(errand);
             goodsMapper.insertErrand(errand);
+            Integer gid = errand.getGID();
             ArrayList<GoodsImage> goodsImages = errand.getGoodsImageList();
             for (GoodsImage x:
                     goodsImages) {
+                x.setG_id(gid);
                 imageMapper.insertGoodImage(x);
             }
         }catch (Exception e) {

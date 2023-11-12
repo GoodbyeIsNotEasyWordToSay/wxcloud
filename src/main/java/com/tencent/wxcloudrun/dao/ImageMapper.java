@@ -7,6 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ImageMapper {
 
-    @Insert("insert into goods_image (GID, IURL, IOrder) values (#{GID}, #{IURL}, #{IOrder})")
+    @Insert("insert into goods_image (g_id, i_url, i_order) values (#{g_id}, #{i_url}, #{i_order})")
     public void insertGoodImage(GoodsImage x);
 }
