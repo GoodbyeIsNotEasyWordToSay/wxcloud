@@ -7,6 +7,8 @@ import com.tencent.wxcloudrun.model.Good;
 import com.tencent.wxcloudrun.model.IdleItem;
 import com.tencent.wxcloudrun.service.GoodsService;
 import com.tencent.wxcloudrun.config.ApiResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +18,11 @@ import java.util.Optional;
 public class GoodsController {
 
     final GoodsService goodsService;
+    final Logger logger;
 
     public GoodsController(@Autowired GoodsService goodsService) {
         this.goodsService = goodsService;
+        this.logger = LoggerFactory.getLogger(CounterController.class);
     }
 
     @GetMapping("/api/goods/{gid}")
@@ -33,6 +37,9 @@ public class GoodsController {
 
     @PostMapping("/api/goods/release")
     ApiResponse create(@RequestBody ReleaseRequest request){
+        logger.info("/api/goods/release POST request");
+        logger.info(request.toString());
+        logger.info("request.uID =" + request.getUID());
         if(request.getCategory() == 0){
             IdleItem idleItem = new IdleItem();
             idleItem.setGdes(request.getDescription());
