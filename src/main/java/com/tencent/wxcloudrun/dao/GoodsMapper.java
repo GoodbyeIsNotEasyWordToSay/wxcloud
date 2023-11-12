@@ -19,8 +19,8 @@ public interface GoodsMapper {
     @Select("select * from goods where Gcategory = #{Gcategory} and Status = 1")
     ArrayList<Good> getSellingGoods(@Param("Gcategory") int Gcategory);
 
-    @Select("select * from goods_image where GID = #{GID}")
-    ArrayList<GoodsImage> getgoodimage(@Param("GID") int gid);
+    @Select("select * from goods_image where g_id = #{g_id}")
+    ArrayList<GoodsImage> getGoodImage(@Param("g_id") int gid);
 
     @Insert("insert into goods(Gdes, Gprice, Gcampus, Status, Gcategory, UID) values (#{Gdes}, #{Gprice}, #{Gcampus}, #{Status}, #{Gcategory}, #{UID})")
     @Options(useGeneratedKeys = true, keyProperty = "GID", keyColumn = "GID")
