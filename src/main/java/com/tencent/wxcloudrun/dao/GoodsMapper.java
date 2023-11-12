@@ -1,9 +1,12 @@
 package com.tencent.wxcloudrun.dao;
 
-import com.tencent.wxcloudrun.model.Goods;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import com.tencent.wxcloudrun.model.Errand;
+import com.tencent.wxcloudrun.model.Good;
+import com.tencent.wxcloudrun.model.GoodsImage;
+import com.tencent.wxcloudrun.model.IdleItem;
+import org.apache.ibatis.annotations.*;
+
+import java.util.ArrayList;
 
 @Mapper
 public interface GoodsMapper {
@@ -14,7 +17,7 @@ public interface GoodsMapper {
     ArrayList<Good> getGoods(@Param("keyword") String keyword);
 
     @Select("select * from goods where Gcategory = #{Gcategory} and Status = 1")
-    ArrayList<Good> getSellingGoods(@Param("Gcatefory") int Gcategory);
+    ArrayList<Good> getSellingGoods(@Param("Gcategory") int Gcategory);
 
     @Select("select * from goods_image where GID = #{GID}")
     ArrayList<GoodsImage> getgoodimage(@Param("GID") int gid);
