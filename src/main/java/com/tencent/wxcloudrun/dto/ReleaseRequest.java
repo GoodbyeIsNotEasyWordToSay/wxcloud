@@ -10,10 +10,14 @@ import java.util.ArrayList;
 public class ReleaseRequest {
     private String description;
     private Float price;
-    private ArrayList<GoodsImage> imageList; //图片url
+    private ArrayList<GoodsImage> imageList = new ArrayList<>(); //图片url
     private Integer campus; //8-兴庆，4-雁塔，2-曲江，1-创新港；四个数字之和
     private Integer category; //0-闲置，1-跑腿
-    private Integer uID;
+    private Integer uid;
     private Integer status;
     private LocalDateTime deadline;
+
+    public ReleaseRequest(){
+
+    }
 }

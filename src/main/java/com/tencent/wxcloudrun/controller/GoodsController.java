@@ -39,7 +39,7 @@ public class GoodsController {
     ApiResponse create(@RequestBody ReleaseRequest request){
         logger.info("/api/goods/release POST request");
         logger.info(request.toString());
-        logger.info("request.uID =" + request.getUID());
+        logger.info("request.uID =" + request.getUid());
         if(request.getCategory() == 0){
             IdleItem idleItem = new IdleItem();
             idleItem.setGdes(request.getDescription());
@@ -48,7 +48,7 @@ public class GoodsController {
             idleItem.setGoodsImageList(request.getImageList());
             idleItem.setGcategory(0);
             idleItem.setStatus(1);
-            idleItem.setUID(request.getUID());
+            idleItem.setUID(request.getUid());
 
             int insertResult = goodsService.insertIdleItem(idleItem);
             if(insertResult == 1){
@@ -66,7 +66,7 @@ public class GoodsController {
             errand.setGoodsImageList(request.getImageList());
             errand.setGcategory(1);
             errand.setStatus(1);
-            errand.setUID(request.getUID());
+            errand.setUID(request.getUid());
             errand.setDeadline(request.getDeadline());
 
             int insertResult = goodsService.insertErrand(errand);
