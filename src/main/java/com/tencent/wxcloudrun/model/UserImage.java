@@ -1,6 +1,8 @@
 package com.tencent.wxcloudrun.model;
 
-public class UserImage {
+import java.io.Serializable;
+
+public class UserImage implements Serializable {
     protected Integer UImageID;
     protected Integer UID;
     protected String IURL;
