@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class GoodsImage {
-    private Integer GImageID;
-    private Integer GID;
-    private String IURL;
-    private Integer IOrder;
+    protected Integer GImageID;
+    protected Integer GID;
+    protected String IURL;
+    protected Integer IOrder;
 }

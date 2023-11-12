@@ -8,24 +8,24 @@ import java.util.ArrayList;
 
 @Data
 public class Good implements Serializable{
-    private Integer GID;
+    protected Integer GID;
 
-    private String Gdes;
+    protected String Gdes;
 
-    private Integer Gcampus;
+    protected Integer Gcampus;
 
-    private LocalDateTime Gcreatetime;
+    protected LocalDateTime Gcreatetime;
 
-    private LocalDateTime Gupdatetime;
+    protected LocalDateTime Gupdatetime;
 
-    private Integer Status;
+    protected Integer Status;
 
-    private Integer Gcategory;
+    protected Integer Gcategory;
 
-    private Integer UID;
+    protected Integer UID;
 
-    private Float Gprice;
+    protected Float Gprice;
 
-    private ArrayList<GoodsImage> goodsImageList;
+    protected ArrayList<GoodsImage> goodsImageList;
 
 }

@@ -7,6 +7,6 @@ import java.time.LocalDateTime;
 
 @Data
 public class Errand extends Good implements Serializable {
-    private LocalDateTime deadline;
-    private LocalDateTime endtime;
+    protected LocalDateTime deadline;
+    protected LocalDateTime endtime;
 }
