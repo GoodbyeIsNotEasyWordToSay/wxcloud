@@ -8,11 +8,11 @@ import java.time.LocalDateTime;
 @Data
 public class Counter implements Serializable {
 
-  private Integer id;
+  protected Integer id;
 
-  private Integer count;
+  protected Integer count;
 
-  private LocalDateTime createdAt;
+  protected LocalDateTime createdAt;
 
-  private LocalDateTime updatedAt;
+  protected LocalDateTime updatedAt;
 }
