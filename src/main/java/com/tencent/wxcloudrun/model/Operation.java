@@ -10,7 +10,7 @@ public class Operation implements Serializable{
 
     private int GID;
 
-    private int UserID;
+    private String UserID;
 
     private int Otype;
 

@@ -44,50 +44,40 @@ public class GoodsController {
         logger.info("/api/goods/release POST request");
         logger.info(request.toString());
 
-        Optional<Integer> uID = loginService.getUID(openID);
-        Integer uid;
-        if (uID.isPresent()){
-            uid = uID.get();
-            logger.info("request.uID =" + uid);
+        if(request.getCategory() == 0){
+            IdleItem idleItem = new IdleItem();
+            idleItem.setGdes(request.getDescription());
+            idleItem.setGprice(request.getPrice());
+            idleItem.setGcampus(request.getCampus());
+            idleItem.setGoodsImageList(request.getImageList());
+            idleItem.setGcategory(0);
+            idleItem.setStatus(1);
+            idleItem.setUID(openID);
 
-            if(request.getCategory() == 0){
-                IdleItem idleItem = new IdleItem();
-                idleItem.setGdes(request.getDescription());
-                idleItem.setGprice(request.getPrice());
-                idleItem.setGcampus(request.getCampus());
-                idleItem.setGoodsImageList(request.getImageList());
-                idleItem.setGcategory(0);
-                idleItem.setStatus(1);
-                idleItem.setUID(uid);
-
-                try {
-                    int goodsId = goodsService.insertIdleItem(idleItem);
-                    return ApiResponse.ok(goodsId);
-                }catch (Exception e){
-                    return ApiResponse.error("发布失败");
-                }
+            try {
+                int goodsId = goodsService.insertIdleItem(idleItem);
+                return ApiResponse.ok(goodsId);
+            }catch (Exception e){
+                return ApiResponse.error("发布失败");
             }
-            else {
-                Errand errand = new Errand();
-                errand.setGdes(request.getDescription());
-                errand.setGprice(request.getPrice());
-                errand.setGcampus(request.getCampus());
-                errand.setGoodsImageList(request.getImageList());
-                errand.setGcategory(1);
-                errand.setStatus(1);
-                errand.setUID(uid);
-                errand.setDeadline(request.getDeadline());
+        }
+        else {
+            Errand errand = new Errand();
+            errand.setGdes(request.getDescription());
+            errand.setGprice(request.getPrice());
+            errand.setGcampus(request.getCampus());
+            errand.setGoodsImageList(request.getImageList());
+            errand.setGcategory(1);
+            errand.setStatus(1);
+            errand.setUID(openID);
+            errand.setDeadline(request.getDeadline());
 
-                try {
-                    int goodsId = goodsService.insertErrand(errand);
-                    return ApiResponse.ok(goodsId);
-                }catch (Exception e){
-                    return ApiResponse.error("发布失败");
-                }
+            try {
+                int goodsId = goodsService.insertErrand(errand);
+                return ApiResponse.ok(goodsId);
+            }catch (Exception e){
+                return ApiResponse.error("发布失败");
             }
-        } else {
-            logger.info("user not found");
-            return ApiResponse.error("找不到用户");
         }
     }
 

@@ -16,16 +16,16 @@ public class LoginServiceImpl implements LoginService {
         this.loginMapper = loginMapper;
     }
 
-    @Override
-    public Optional<Integer> getUID(String openID){
-        Integer UID = loginMapper.getUID(openID);
-        if(UID == null){
-           loginMapper.insertUser(openID);
-           UID = loginMapper.getUID(openID);
-           return Optional.ofNullable(UID);
-        }
-        else{
-            return Optional.of(UID);
-        }
-    }
+//    @Override
+//    public Optional<Integer> getUID(String openID){
+//        Integer UID = loginMapper.getUID(openID);
+//        if(UID == null){
+//           loginMapper.insertUser(openID);
+//           UID = loginMapper.getUID(openID);
+//           return Optional.ofNullable(UID);
+//        }
+//        else{
+//            return Optional.of(UID);
+//        }
+//    }
 }
