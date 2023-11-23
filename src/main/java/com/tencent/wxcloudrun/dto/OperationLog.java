@@ -5,11 +5,11 @@ import java.time.LocalDateTime;
 
 @Data
 public class OperationLog {
-    private int GID;
+    private int gid;
 
-    private int UserID;
+    private int userid;
 
-    private int Otype;
+    private int otype;
 
-    private LocalDateTime Otime;
+    private LocalDateTime otime;
 }
