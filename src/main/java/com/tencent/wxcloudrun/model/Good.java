@@ -22,7 +22,7 @@ public class Good implements Serializable{
 
     protected Integer Gcategory;
 
-    protected Integer UID;
+    protected String UID;
 
     protected Float Gprice;
 

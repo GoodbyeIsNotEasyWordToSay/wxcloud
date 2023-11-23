@@ -18,9 +18,9 @@ public class LoginController {
         this.loginService = loginService;
     }
 
-    @GetMapping(value = "/api/login/{openID}")
-    public ApiResponse getDetails(@PathVariable String openID) {
-        Optional<Integer> UID = loginService.getUID(openID);
-        return ApiResponse.ok(UID);
-    }
+//    @GetMapping(value = "/api/login/{openID}")
+//    public ApiResponse getDetails(@PathVariable String openID) {
+//        Optional<Integer> UID = loginService.getUID(openID);
+//        return ApiResponse.ok(UID);
+//    }
 }
