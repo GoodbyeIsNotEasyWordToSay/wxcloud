@@ -18,7 +18,7 @@ public class OperationController {
         this.operationService = operationService;
     }
 
-    @PostMapping ("api/operation")
+    @PostMapping ("/api/operation")
     public ApiResponse Operation(@RequestBody OperationLog operationLog) {
         int result = operationService.Operation(operationLog);
         if(result == 1){
