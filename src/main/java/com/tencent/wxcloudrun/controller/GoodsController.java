@@ -28,7 +28,7 @@ public class GoodsController {
         this.logger = LoggerFactory.getLogger(CounterController.class);
     }
 
-    @GetMapping("/api/goods/{gid}")
+    @GetMapping("/api/goods/get/{gid}")
     public ApiResponse getDetails(@PathVariable Integer gid) {
         Optional<Good> details = goodsService.getGoodsDetail(gid);
         if (details.isPresent()) {
