@@ -47,7 +47,7 @@ public class GoodsServiceImpl implements GoodsService {
         catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return 1;
+        return idleItem.getGID();
     }
 
     @Override
@@ -65,7 +65,7 @@ public class GoodsServiceImpl implements GoodsService {
         }catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return 1;
+        return errand.getGID();
     }
 
 }

@@ -14,7 +14,6 @@ public class ReleaseRequest implements Serializable {
     private ArrayList<GoodsImage> imageList; //图片
     private Integer campus; //8-兴庆，4-雁塔，2-曲江，1-创新港；四个数字之和
     private Integer category; //0-闲置，1-跑腿
-    private Integer uid;
     private Integer status;
     private LocalDateTime deadline;
 
