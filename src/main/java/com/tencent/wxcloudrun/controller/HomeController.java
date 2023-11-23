@@ -16,7 +16,7 @@ public class HomeController {
     final HomeService homeService;
     public HomeController(@Autowired HomeService homeService){this.homeService=homeService;}
 
-    @GetMapping("/api/login/{Gcategory}")
+    @GetMapping("/api/home/{Gcategory}")
     public ApiResponse getHome(@PathVariable Integer Gcategory) {
         Optional<ArrayList<Good>> Home = homeService.getSellingGoods(Gcategory);
         if (Home.isPresent()) {
