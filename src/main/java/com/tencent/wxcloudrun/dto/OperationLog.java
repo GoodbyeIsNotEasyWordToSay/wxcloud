@@ -12,4 +12,20 @@ public class OperationLog {
     private int otype;
 
     private LocalDateTime otime;
+
+    public int getgid() {
+        return gid;
+    }
+
+    public int getuserid() {
+        return userid;
+    }
+
+    public int getotype() {
+        return otype;
+    }
+
+    public LocalDateTime getotime() {
+        return otime;
+    }
 }
