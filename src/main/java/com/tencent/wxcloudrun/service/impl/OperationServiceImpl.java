@@ -2,11 +2,13 @@ package com.tencent.wxcloudrun.service.impl;
 
 import com.tencent.wxcloudrun.dao.OperationMapper;
 import com.tencent.wxcloudrun.dto.OperationLog;
+import com.tencent.wxcloudrun.model.Operation;
 import com.tencent.wxcloudrun.service.OperationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class OperationServiceImpl implements OperationService {
@@ -33,5 +35,10 @@ public class OperationServiceImpl implements OperationService {
         }
 
         return 1;
+    }
+
+    @Override
+    public List<Operation> queryCollectByUid(String userid) {
+        return operationMapper.queryCollectByUid(userid);
     }
 }
