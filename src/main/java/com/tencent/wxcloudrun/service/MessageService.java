@@ -1,7 +1,8 @@
 package com.tencent.wxcloudrun.service;
 
 import com.tencent.wxcloudrun.dto.MessageRequest;
-import com.tencent.wxcloudrun.model.Message;
+import com.tencent.wxcloudrun.model.Chat;
+
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -12,6 +13,6 @@ public interface MessageService {
 
     int insertMessage(MessageRequest message);
     
-    Optional<ArrayList<Message>> getMessageList(String uid);
+    Optional<ArrayList<Chat>> getMessageList(String uid);
 
 }
