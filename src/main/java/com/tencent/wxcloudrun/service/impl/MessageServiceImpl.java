@@ -2,6 +2,7 @@ package com.tencent.wxcloudrun.service.impl;
 
 import com.tencent.wxcloudrun.dao.MessageMapper;
 import com.tencent.wxcloudrun.dto.MessageRequest;
+import com.tencent.wxcloudrun.model.Message;
 import com.tencent.wxcloudrun.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.util.Optional;
 public class MessageServiceImpl implements MessageService {
     final MessageMapper messageMapper;
     public MessageServiceImpl(@Autowired MessageMapper messageMapper){
+
         this.messageMapper = messageMapper;
     }
     @Override
@@ -29,5 +31,12 @@ public class MessageServiceImpl implements MessageService {
         LocalDateTime otime = message.getMtime();
         messageMapper.insertMessage(senderid,reveiverid,content,otime);
         return 0;
+    }
+
+    @Override
+    public Optional<ArrayList<Message>> getMessageList(String uid) {
+        ArrayList<Message> messages;
+        messages=messageMapper.getMessageList(uid);
+        return Optional.of(messages);
     }
 }
