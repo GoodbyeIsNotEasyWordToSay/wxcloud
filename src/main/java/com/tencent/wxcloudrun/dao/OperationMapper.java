@@ -3,18 +3,21 @@ package com.tencent.wxcloudrun.dao;
 import com.tencent.wxcloudrun.dto.OperationLog;
 import org.apache.ibatis.annotations.*;
 
+import java.time.LocalDateTime;
+
 
 @Mapper
 public interface OperationMapper {
-    @Update("UPDATE your_table_name SET Otime = #{operationLog.getotime()} WHERE OID = #{oID} and Otype = 0}")
-    void updateOtime(@Param("operationLog") OperationLog operationLog, @Param("OID") Integer oID);
 
-    @Select("select OID from operation where GID = #{operationLog.getgid()} and UserID = #{operationLog.getuserid()}" )
-    Integer selectOID(@Param("operationLog") OperationLog operationLog);
+    @Select("select OID from operation where GID = #{gid} and UserID = #{userid}" )
+    Integer selectOID(@Param("gid") int gid, @Param("userid") String userid);
 
-    @Insert("insert into operation (GID,UserID,Otype,Otime) values (#{operationLog.getgid()},#{operationLog.getuserid()},#{operationLog.getotype()},#{operationLog.getotime()})")
-    void InsertOperation(@Param("operationLog") OperationLog operationLog, @Param("OID") Integer oID);
+    @Update("UPDATE operation SET Otime = #{otime} WHERE OID = #{OID} and Otype = 0")
+    void updateOtime(@Param("otime")LocalDateTime otime, @Param("OID") Integer oID);
 
-    @Delete("delete * from operation where OID = #{oID} and Otype IN (1, 2)")
-    void DeleteOperation(@Param("operationLog") OperationLog operationLog, @Param("OID") Integer oID);
+    @Insert("insert into operation (GID,UserID,Otype,Otime) values (#{gid},#{userid},#{otype},#{otime})")
+    void InsertOperation(@Param("gid") int gid, @Param("userid") String userid,@Param("otype") int otype,@Param("otime")LocalDateTime otime);
+
+    @Delete("delete from operation where OID = #{OID} and Otype IN (1, 2)")
+    void DeleteOperation(@Param("OID") Integer oID);
 }
