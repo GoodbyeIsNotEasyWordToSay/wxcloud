@@ -13,4 +13,6 @@ public interface GoodsService {
     int insertIdleItem(IdleItem idleItem);
 
     int insertErrand(Errand errand);
+
+    void modifyGood(Good good);
 }
