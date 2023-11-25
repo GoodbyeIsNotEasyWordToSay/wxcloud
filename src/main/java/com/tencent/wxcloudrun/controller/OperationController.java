@@ -22,7 +22,7 @@ public class OperationController {
     public ApiResponse Operation(@RequestBody OperationLog operationLog) {
         int result = operationService.Operation(operationLog);
         if(result == 1){
-            return ApiResponse.ok("成功操作成功");
+            return ApiResponse.ok("操作成功");
         }
         else {
             return ApiResponse.error("操作失败");
