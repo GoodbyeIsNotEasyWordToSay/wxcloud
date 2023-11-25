@@ -31,4 +31,10 @@ public interface GoodsMapper {
 
     @Insert("insert into errand (GID, deadline) values (#{GID}, #{deadline})")
     void insertErrand(Errand errand);
+
+    @Update("update goods set Gdes = #{Gdes}, Gprice = #{Gprice}, Gcampus = #{Gcampus}, Gupdatetime = NOW(), Status = #{Status}, Gcategory = #{Gcategory} where GID = #{GID}")
+    void modifyGood(Good good);
+
+    @Update("update errand set deadline = #{deadline} where gid = #{GID}")
+    void modifyErrand(Errand good);
 }
