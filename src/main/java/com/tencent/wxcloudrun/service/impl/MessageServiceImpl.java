@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
+
 
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -41,22 +41,17 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public Optional<ArrayList<Chat>> getMessageList(String uid) {
         ArrayList<Message> messages;
-        ArrayList<Chat> chats=new ArrayList<>();
-        AtomicInteger i= new AtomicInteger();
         messages=messageMapper.getMessageList(uid);
-        messages.forEach((message) -> {
-            if (message.getSenderid().equals(uid)){
-                chats.get(i.get()).setMessage(message);
-                chats.get(i.get()).setProfilePhoto(userMapper.getUserProfilePhoto(message.getReceiverid()));
-                chats.get(i.get()).setNameOfCounterpart(userMapper.getUserName(message.getReceiverid()));
-                i.getAndIncrement();
-            }else {
-                chats.get(i.get()).setMessage(message);
-                chats.get(i.get()).setProfilePhoto(userMapper.getUserProfilePhoto(message.getSenderid()));
-                chats.get(i.get()).setNameOfCounterpart(userMapper.getUserName(message.getSenderid()));
-                i.getAndIncrement();
+        ArrayList<Chat> chats=new ArrayList<>();
+        for (Message message : messages) {
+            if (message.getSenderid().equals(uid)) {
+                Chat chat = new Chat(message, userMapper.getUserName(message.getReceiverid()), userMapper.getUserProfilePhoto(message.getReceiverid()));
+                chats.add(chat);
+            } else {
+                Chat chat = new Chat(message, userMapper.getUserName(uid), userMapper.getUserProfilePhoto(uid));
+                chats.add(chat);
             }
-        });
+        }
         return Optional.of(chats);
     }
 }
