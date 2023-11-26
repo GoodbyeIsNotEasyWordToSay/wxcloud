@@ -34,7 +34,8 @@ public class MessageServiceImpl implements MessageService {
         String reveiverid = message.getReceiverid();
         String content = message.getContent();
         LocalDateTime otime = message.getMtime();
-        messageMapper.insertMessage(senderid,reveiverid,content,otime);
+        int category = message.getCategory();
+        messageMapper.insertMessage(senderid,reveiverid,content,otime,category);
         return 0;
     }
 

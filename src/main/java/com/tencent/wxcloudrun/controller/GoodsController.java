@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
@@ -123,6 +124,7 @@ public class GoodsController {
         return ApiResponse.ok();
     }
 
+
     //delete a good by gid (not actually delete, just set status to 3)
     @PostMapping("/api/goods/delete/{gid}")
     ApiResponse deleteGood(@PathVariable Integer gid, @RequestHeader("x-wx-openid") String openid) {
@@ -137,4 +139,25 @@ public class GoodsController {
             return ApiResponse.error("删除失败");
         }
     }
+
+    @GetMapping("/api/goods/getones/{uid}")
+    ApiResponse getOnesSellingGoods(@PathVariable String uid){
+        Optional<ArrayList<Good>> goods=goodsService.getSomeonesSellingGoods(uid);
+        if (goods.isPresent()) {
+            return ApiResponse.ok(goods);
+        } else {
+            return ApiResponse.error("");
+        }
+    }
+    @GetMapping("/api/goods/saleconfirm/{gid}")
+    ApiResponse saleConfirm(@PathVariable int gid){
+        int result=goodsService.setGoodSold(gid);
+        if(result == 1){
+            return ApiResponse.ok("操作成功");
+        }
+        else {
+            return ApiResponse.error("操作失败");
+        }
+    }
+
 }

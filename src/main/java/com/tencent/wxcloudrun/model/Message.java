@@ -12,4 +12,5 @@ public class Message implements Serializable {
     protected String receiverid;
     protected String content;
     protected LocalDateTime mtime;
+    protected int category;//0-普通消息，1-特殊消息
 }
