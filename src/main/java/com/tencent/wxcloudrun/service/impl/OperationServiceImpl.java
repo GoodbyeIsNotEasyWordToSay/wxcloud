@@ -43,6 +43,12 @@ public class OperationServiceImpl implements OperationService {
     }
 
     @Override
+    public int wannaBuy(String uid, Integer gid) {
+        operationMapper.InsertNewOperation(gid,uid,2);
+        return 1;
+    }  
+      
+    @Override
     public ArrayList<Operation> queryCollectByUid(String userid) {
         try {
             ArrayList<Operation> operations = operationMapper.queryCollectByUid(userid);

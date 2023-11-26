@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
@@ -121,5 +122,15 @@ public class GoodsController {
         logger.info("/api/goods/test POST request");
         logger.info(jsonString);
         return ApiResponse.ok();
+    }
+
+    @GetMapping("/api/goods/getones/{uid}")
+    ApiResponse getOnesSellingGoods(@PathVariable String uid){
+        Optional<ArrayList<Good>> goods=goodsService.getSomeonesSellingGoods(uid);
+        if (goods.isPresent()) {
+            return ApiResponse.ok(goods);
+        } else {
+            return ApiResponse.error("");
+        }
     }
 }

@@ -24,6 +24,8 @@ public interface OperationMapper {
     @Delete("delete from operation where OID = #{OID} and Otype IN (1, 2)")
     void DeleteOperation(@Param("OID") Integer oID);
 
+    @Insert("insert into operation (GID,UserID,Otype) values (#{gid},#{userid},#{otype})")
+    void InsertNewOperation(@Param("gid") int gid, @Param("userid") String userid,@Param("otype") int otype);
 
     @Select("select t.oid, t1.Gdes, t1.Gprice, t.Otype , t12.i_url as iurl " +
             "from operation t , goods t1 , goods_image t12 " +
@@ -32,5 +34,6 @@ public interface OperationMapper {
             "and t.Otype = 1 " +
             "and  UserID=#{userid}" )
     ArrayList<Operation> queryCollectByUid(@Param("userid") String userid);
+
 
 }
