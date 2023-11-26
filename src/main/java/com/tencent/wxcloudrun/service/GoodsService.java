@@ -18,5 +18,6 @@ public interface GoodsService {
     Optional<ArrayList<Good>> getSomeonesSellingGoods(String uid);
 
     void modifyGood(Good good);
+    int setGoodSold(int gid);
 
 }
