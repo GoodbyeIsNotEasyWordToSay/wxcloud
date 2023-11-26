@@ -25,14 +25,18 @@ public class OperationServiceImpl implements OperationService {
         String userid = operationLog.getUserid();
         int otype = operationLog.getOtype();
         LocalDateTime otime = operationLog.getOtime();
-
-        Integer oid = operationMapper.selectOID(gid,userid);
+        Integer oid = operationMapper.selectOID(gid,userid,otype);
         if(oid == null){
             operationMapper.InsertOperation(gid,userid,otype,otime);
         }
         else {
-            operationMapper.updateOtime(otime, oid);
-            operationMapper.DeleteOperation(oid);
+            if(otype == 0){
+                operationMapper.updateOtime(otime, oid);
+            }
+            else{
+                operationMapper.DeleteOperation(oid);
+            }
+
         }
 
         return 1;
