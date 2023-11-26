@@ -103,4 +103,10 @@ public class GoodsServiceImpl implements GoodsService {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public int setGoodSold(int gid) {
+        goodsMapper.setGoodSold(gid);
+        return 1;
+    }
 }

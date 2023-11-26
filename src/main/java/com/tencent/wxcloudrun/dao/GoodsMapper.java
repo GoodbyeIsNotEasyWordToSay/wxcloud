@@ -43,5 +43,8 @@ public interface GoodsMapper {
 
     @Update("update errand set deadline = #{deadline} where gid = #{GID}")
     void modifyErrand(Errand good);
+
+    @Update("update goods set Status = 2 where gid = #{GID}")
+    void setGoodSold(@Param("GID") int gid);
 }
 

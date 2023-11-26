@@ -133,4 +133,15 @@ public class GoodsController {
             return ApiResponse.error("");
         }
     }
+    @GetMapping("/api/goods/saleconfirm/{gid}")
+    ApiResponse saleConfirm(@PathVariable int gid){
+        int result=goodsService.setGoodSold(gid);
+        if(result == 1){
+            return ApiResponse.ok("操作成功");
+        }
+        else {
+            return ApiResponse.error("操作失败");
+        }
+    }
+
 }
