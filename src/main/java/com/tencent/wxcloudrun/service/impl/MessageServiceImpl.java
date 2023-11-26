@@ -45,10 +45,10 @@ public class MessageServiceImpl implements MessageService {
         ArrayList<Chat> chats=new ArrayList<>();
         for (Message message : messages) {
             if (message.getSenderid().equals(uid)) {
-                Chat chat = new Chat(message, userMapper.getUserName(message.getReceiverid()), userMapper.getUserProfilePhoto(message.getReceiverid()));
+                Chat chat = new Chat(message, userMapper.getUserName(message.getReceiverid()), userMapper.getUserProfilePhoto(message.getReceiverid()),message.getReceiverid());
                 chats.add(chat);
             } else {
-                Chat chat = new Chat(message, userMapper.getUserName(message.getSenderid()), userMapper.getUserProfilePhoto(message.getSenderid()));
+                Chat chat = new Chat(message, userMapper.getUserName(message.getSenderid()), userMapper.getUserProfilePhoto(message.getSenderid()),message.getSenderid());
                 chats.add(chat);
             }
         }

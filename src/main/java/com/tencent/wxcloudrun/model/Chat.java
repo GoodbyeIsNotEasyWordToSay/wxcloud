@@ -9,9 +9,11 @@ public class Chat implements Serializable {
     protected Message message;
     protected String nameOfCounterpart;
     protected String profilePhoto;
-public Chat(Message message, String userName, String userProfilePhoto) {
+    protected String IDOfCounterpart;
+public Chat(Message message, String userName, String userProfilePhoto,String IDOfCounterpart) {
         this.message=message;
         this.nameOfCounterpart=userName;
         this.profilePhoto=userProfilePhoto;
+        this.IDOfCounterpart=IDOfCounterpart;
     }
 }
