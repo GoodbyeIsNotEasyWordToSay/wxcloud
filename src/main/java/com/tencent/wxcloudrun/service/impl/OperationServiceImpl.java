@@ -2,11 +2,14 @@ package com.tencent.wxcloudrun.service.impl;
 
 import com.tencent.wxcloudrun.dao.OperationMapper;
 import com.tencent.wxcloudrun.dto.OperationLog;
+import com.tencent.wxcloudrun.model.Operation;
 import com.tencent.wxcloudrun.service.OperationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class OperationServiceImpl implements OperationService {
@@ -22,14 +25,18 @@ public class OperationServiceImpl implements OperationService {
         String userid = operationLog.getUserid();
         int otype = operationLog.getOtype();
         LocalDateTime otime = operationLog.getOtime();
-
-        Integer oid = operationMapper.selectOID(gid,userid);
+        Integer oid = operationMapper.selectOID(gid,userid,otype);
         if(oid == null){
             operationMapper.InsertOperation(gid,userid,otype,otime);
         }
         else {
-            operationMapper.updateOtime(otime, oid);
-            operationMapper.DeleteOperation(oid);
+            if(otype == 0){
+                operationMapper.updateOtime(otime, oid);
+            }
+            else{
+                operationMapper.DeleteOperation(oid);
+            }
+
         }
 
         return 1;
@@ -39,5 +46,15 @@ public class OperationServiceImpl implements OperationService {
     public int wannaBuy(String uid, Integer gid) {
         operationMapper.InsertNewOperation(gid,uid,2);
         return 1;
+    }  
+      
+    @Override
+    public ArrayList<Operation> queryCollectByUid(String userid) {
+        try {
+            ArrayList<Operation> operations = operationMapper.queryCollectByUid(userid);
+            return operations;
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 }

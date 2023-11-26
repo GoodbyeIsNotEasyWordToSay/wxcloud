@@ -14,5 +14,9 @@ public interface GoodsService {
     int insertIdleItem(IdleItem idleItem);
 
     int insertErrand(Errand errand);
+
     Optional<ArrayList<Good>> getSomeonesSellingGoods(String uid);
+
+    void modifyGood(Good good);
+
 }

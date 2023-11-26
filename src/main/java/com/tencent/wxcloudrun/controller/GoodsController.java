@@ -1,12 +1,13 @@
 package com.tencent.wxcloudrun.controller;
 
 
+import com.tencent.wxcloudrun.config.ApiResponse;
+import com.tencent.wxcloudrun.dto.ModifyRequest;
 import com.tencent.wxcloudrun.dto.ReleaseRequest;
 import com.tencent.wxcloudrun.model.Errand;
 import com.tencent.wxcloudrun.model.Good;
 import com.tencent.wxcloudrun.model.IdleItem;
 import com.tencent.wxcloudrun.service.GoodsService;
-import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,12 +21,12 @@ import java.util.Optional;
 public class GoodsController {
 
     final GoodsService goodsService;
-    final UserService loginService;
+    final UserService userService;
     final Logger logger;
 
-    public GoodsController(@Autowired GoodsService goodsService, @Autowired UserService loginService) {
+    public GoodsController(@Autowired GoodsService goodsService, @Autowired UserService userService) {
         this.goodsService = goodsService;
-        this.loginService = loginService;
+        this.userService = userService;
         this.logger = LoggerFactory.getLogger(CounterController.class);
     }
 
@@ -41,11 +42,11 @@ public class GoodsController {
 
     //@RequestBody解析json注入对象这一过程对对象的属性名命名十分严格，建议改成全部小写并以下划线分隔单词（前两个字母不能1小2大）
     @PostMapping("/api/goods/release")
-    ApiResponse create(@RequestBody ReleaseRequest request, @RequestHeader("x-wx-openid") String openID){
+    ApiResponse releaseGood(@RequestBody ReleaseRequest request, @RequestHeader("x-wx-openid") String openID) {
         logger.info("/api/goods/release POST request");
         logger.info(request.toString());
 
-        if(request.getCategory() == 0){
+        if (request.getCategory() == 0) {
             IdleItem idleItem = new IdleItem();
             idleItem.setGdes(request.getDescription());
             idleItem.setGprice(request.getPrice());
@@ -58,11 +59,11 @@ public class GoodsController {
             try {
                 int goodsId = goodsService.insertIdleItem(idleItem);
                 return ApiResponse.ok(goodsId);
-            }catch (Exception e){
+            } catch (Exception e) {
+                e.printStackTrace();
                 return ApiResponse.error("发布失败");
             }
-        }
-        else {
+        } else {
             Errand errand = new Errand();
             errand.setGdes(request.getDescription());
             errand.setGprice(request.getPrice());
@@ -76,14 +77,48 @@ public class GoodsController {
             try {
                 int goodsId = goodsService.insertErrand(errand);
                 return ApiResponse.ok(goodsId);
-            }catch (Exception e){
+            } catch (Exception e) {
+                e.printStackTrace();
                 return ApiResponse.error("发布失败");
             }
         }
     }
 
+    @PostMapping("/api/goods/modify")
+    ApiResponse modifyGood(@RequestBody ModifyRequest request, @RequestHeader("x-wx-openid") String openid) {
+        if(! request.getUid().equals(openid)){
+            return ApiResponse.error("操作人与商品所属人不一致");
+        }
+        Good good;
+        if (request.getCategory() == 0) {
+            good = new IdleItem();
+            good.setGcategory(0);
+        } else if(request.getCategory() == 1) {
+            good = new Errand();
+            good.setGcategory(1);
+            ((Errand) good).setDeadline(request.getDeadline());
+        }else {
+            return ApiResponse.error("商品类型未知");
+        }
+        good.setGID(request.getGid());
+        good.setGdes(request.getDescription());
+        good.setGcampus(request.getCampus());
+        good.setStatus(request.getStatus());
+        good.setUID(openid);
+        good.setGprice(request.getPrice());
+        good.setGoodsImageList(request.getGoodsImages());
+
+        try{
+            goodsService.modifyGood(good);
+            return ApiResponse.ok();
+        }catch (Exception e){
+            e.printStackTrace();
+            return ApiResponse.error("修改失败");
+        }
+    }
+
     @PostMapping("/api/goods/test")
-    ApiResponse create(@RequestBody String jsonString){
+    ApiResponse releaseGood(@RequestBody String jsonString) {
         logger.info("/api/goods/test POST request");
         logger.info(jsonString);
         return ApiResponse.ok();

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 @Mapper
 public interface MessageMapper {
 
-    @Select("select * from message where SenderID = #{senderid} and ReceiverID = #{receiverid}")
+    @Select("select * from message where (SenderID = #{senderid} and ReceiverID = #{receiverid})or(SenderID = #{receiverid} and ReceiverID = #{senderid})")
     ArrayList<MessageRequest>getMessage(@Param("senderid") String senderid,@Param("receiverid") String receiverid);
 
     @Insert("insert into message (SenderID,ReceiverID,Content,Mtime) values(#{senderid},#{receiverid},#{content},#{mtime})")
