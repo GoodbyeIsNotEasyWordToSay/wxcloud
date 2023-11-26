@@ -28,9 +28,10 @@ public interface OperationMapper {
     void InsertNewOperation(@Param("gid") int gid, @Param("userid") String userid,@Param("otype") int otype);
 
     @Select("select t.oid, t1.Gdes, t1.Gprice, t.Otype , t12.i_url as iurl " +
-            "from operation t , goods t1 , goods_image t12 " +
+            "from operation t , goods t1 , goods_image t12  " +
             "where t.GID =t1.GID " +
             "and t1.GID= t12.g_id " +
+            "and t1.status = 1 " +
             "and t.Otype = 1 " +
             "and  UserID=#{userid}" )
     ArrayList<Operation> queryCollectByUid(@Param("userid") String userid);
