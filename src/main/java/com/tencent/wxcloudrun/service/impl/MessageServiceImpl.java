@@ -48,7 +48,7 @@ public class MessageServiceImpl implements MessageService {
                 Chat chat = new Chat(message, userMapper.getUserName(message.getReceiverid()), userMapper.getUserProfilePhoto(message.getReceiverid()));
                 chats.add(chat);
             } else {
-                Chat chat = new Chat(message, userMapper.getUserName(uid), userMapper.getUserProfilePhoto(uid));
+                Chat chat = new Chat(message, userMapper.getUserName(message.getSenderid()), userMapper.getUserProfilePhoto(message.getSenderid()));
                 chats.add(chat);
             }
         }
