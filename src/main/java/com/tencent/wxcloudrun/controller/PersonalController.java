@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,19 +28,24 @@ public class PersonalController {
         this.personalService = personalService;
     }
 
-    @PostMapping ("/api/personal/queryCollectByUid")
+    @GetMapping ("/api/personal/queryCollectByUid")
     public ApiResponse queryCollectByUid(@RequestHeader("x-wx-openid") String uid){
-        List<Operation>  list = operationService.queryCollectByUid(uid);
-        return ApiResponse.ok(list);
+        try {
+            ArrayList<Operation> list = operationService.queryCollectByUid(uid);
+            return ApiResponse.ok(list);
+        } catch (Exception e){
+            e.printStackTrace();
+            return ApiResponse.error("失败");
+        }
     }
 
-    @PostMapping("/api/personal/queryBuyByUid")
+    @GetMapping("/api/personal/queryBuyByUid")
     public ApiResponse queryBuyByUid(@RequestHeader("x-wx-openid") String uid){
         List<Deal> list =  personalService.buyOrSell(uid, null);
         return ApiResponse.ok(list);
     }
 
-    @PostMapping("/api/personal/querySellByUid")
+    @GetMapping("/api/personal/querySellByUid")
     public ApiResponse querySellByUid(@RequestHeader("x-wx-openid") String uid){
         List<Deal> list =  personalService.buyOrSell(null, uid);
         return ApiResponse.ok(list);

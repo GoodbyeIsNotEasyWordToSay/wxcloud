@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -38,7 +39,7 @@ public class OperationServiceImpl implements OperationService {
     }
 
     @Override
-    public List<Operation> queryCollectByUid(String userid) {
+    public ArrayList<Operation> queryCollectByUid(String userid) {
         return operationMapper.queryCollectByUid(userid);
     }
 }

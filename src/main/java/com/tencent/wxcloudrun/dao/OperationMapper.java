@@ -5,6 +5,7 @@ import com.tencent.wxcloudrun.model.Operation;
 import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,6 +31,6 @@ public interface OperationMapper {
             "and t1.GID= t12.g_id " +
             "and t.Otype = 1 " +
             "and  UserID=#{userid}" )
-    List<Operation> queryCollectByUid(@Param("userid") String userid);
+    ArrayList<Operation> queryCollectByUid(@Param("userid") String userid);
 
 }
