@@ -40,6 +40,11 @@ public class OperationServiceImpl implements OperationService {
 
     @Override
     public ArrayList<Operation> queryCollectByUid(String userid) {
-        return operationMapper.queryCollectByUid(userid);
+        try {
+            ArrayList<Operation> operations = operationMapper.queryCollectByUid(userid);
+            return operations;
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 }
