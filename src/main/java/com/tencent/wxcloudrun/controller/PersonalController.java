@@ -7,6 +7,7 @@ import com.tencent.wxcloudrun.service.OperationService;
 import com.tencent.wxcloudrun.service.PersonalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,19 +27,19 @@ public class PersonalController {
         this.personalService = personalService;
     }
 
-    @GetMapping("/api/personal/queryCollectByUid")
+    @PostMapping ("/api/personal/queryCollectByUid")
     public ApiResponse queryCollectByUid(@RequestHeader("x-wx-openid") String uid){
         List<Operation>  list = operationService.queryCollectByUid(uid);
         return ApiResponse.ok(list);
     }
 
-    @GetMapping("/api/personal/queryBuyByUid")
+    @PostMapping("/api/personal/queryBuyByUid")
     public ApiResponse queryBuyByUid(@RequestHeader("x-wx-openid") String uid){
         List<Deal> list =  personalService.buyOrSell(uid, null);
         return ApiResponse.ok(list);
     }
 
-    @GetMapping("/api/personal/querySellByUid")
+    @PostMapping("/api/personal/querySellByUid")
     public ApiResponse querySellByUid(@RequestHeader("x-wx-openid") String uid){
         List<Deal> list =  personalService.buyOrSell(null, uid);
         return ApiResponse.ok(list);

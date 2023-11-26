@@ -17,7 +17,9 @@
             t.did AS id,
             t1.Gdes,
             t1.Gprice,
-            t12.I_URL
+            t12.I_URL as iurl,
+            t.buyerID,
+            t.sellerID
         FROM
             deal t,
             goods t1,
