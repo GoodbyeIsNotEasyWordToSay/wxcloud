@@ -12,8 +12,8 @@ import java.util.List;
 @Mapper
 public interface OperationMapper {
 
-    @Select("select OID from operation where GID = #{gid} and UserID = #{userid}" )
-    Integer selectOID(@Param("gid") int gid, @Param("userid") String userid);
+    @Select("select OID from operation where GID = #{gid} and UserID = #{userid} and Otype = #{otype}" )
+    Integer selectOID(@Param("gid") int gid, @Param("userid") String userid, @Param("otype") int otype);
 
     @Update("UPDATE operation SET Otime = #{otime} WHERE OID = #{OID} and Otype = 0")
     void updateOtime(@Param("otime")LocalDateTime otime, @Param("OID") Integer oID);
