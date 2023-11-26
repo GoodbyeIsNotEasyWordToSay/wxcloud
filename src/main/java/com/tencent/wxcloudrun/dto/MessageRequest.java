@@ -12,6 +12,7 @@ public class MessageRequest implements Serializable {
     private String receiverid;
     private String content;
     private LocalDateTime mtime;
+    private int category;
 
 
 }
