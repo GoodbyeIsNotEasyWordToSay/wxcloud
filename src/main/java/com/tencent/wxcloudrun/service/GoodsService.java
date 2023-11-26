@@ -15,4 +15,6 @@ public interface GoodsService {
     int insertErrand(Errand errand);
 
     void modifyGood(Good good);
+
+    void deleteGood(Integer gid, String openid);
 }

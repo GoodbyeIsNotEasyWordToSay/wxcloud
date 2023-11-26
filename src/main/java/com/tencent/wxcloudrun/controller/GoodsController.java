@@ -122,4 +122,19 @@ public class GoodsController {
         logger.info(jsonString);
         return ApiResponse.ok();
     }
+
+    //delete a good by gid (not actually delete, just set status to 3)
+    @PostMapping("/api/goods/delete/{gid}")
+    ApiResponse deleteGood(@PathVariable Integer gid, @RequestHeader("x-wx-openid") String openid) {
+        logger.info("/api/goods/delete POST request");
+        logger.info("gid: " + gid);
+        logger.info("openid: " + openid);
+        try {
+            goodsService.deleteGood(gid, openid);
+            return ApiResponse.ok();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ApiResponse.error("删除失败");
+        }
+    }
 }

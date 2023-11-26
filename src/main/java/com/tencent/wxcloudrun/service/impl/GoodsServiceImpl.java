@@ -94,4 +94,27 @@ public class GoodsServiceImpl implements GoodsService {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void deleteGood(Integer gid, String openid) {
+        try {
+            Good good = goodsMapper.getGood(gid);
+            //check if the operator is the same person as the owner of the good
+            if (! openid.equals(good.getUID())) {
+                throw new RuntimeException("操作人与商品所属人不一致");
+            } else {
+                //set good status to 3 (deleted)
+                good.setStatus(3);
+                goodsMapper.modifyGood(good);
+                //set good end time to now
+                if(good.getGcategory() == 0) {
+                    goodsMapper.endGood("idle_item", gid);
+                } else {
+                    goodsMapper.endGood("errand", gid);
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
