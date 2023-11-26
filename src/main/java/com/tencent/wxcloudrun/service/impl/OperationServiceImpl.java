@@ -34,4 +34,10 @@ public class OperationServiceImpl implements OperationService {
 
         return 1;
     }
+
+    @Override
+    public int wannaBuy(String uid, Integer gid) {
+        operationMapper.InsertNewOperation(gid,uid,2);
+        return 1;
+    }
 }

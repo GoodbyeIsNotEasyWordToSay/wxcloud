@@ -4,6 +4,7 @@ import com.tencent.wxcloudrun.model.Errand;
 import com.tencent.wxcloudrun.model.Good;
 import com.tencent.wxcloudrun.model.IdleItem;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 
@@ -13,4 +14,5 @@ public interface GoodsService {
     int insertIdleItem(IdleItem idleItem);
 
     int insertErrand(Errand errand);
+    Optional<ArrayList<Good>> getSomeonesSellingGoods(String uid);
 }

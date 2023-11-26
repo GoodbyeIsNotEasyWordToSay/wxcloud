@@ -4,4 +4,5 @@ import com.tencent.wxcloudrun.dto.OperationLog;
 
 public interface OperationService {
     int Operation(OperationLog operationLog);
+    int wannaBuy(String uid,Integer gid);
 }

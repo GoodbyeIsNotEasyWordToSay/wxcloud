@@ -1,6 +1,6 @@
 package com.tencent.wxcloudrun.dao;
 
-import com.tencent.wxcloudrun.dto.OperationLog;
+
 import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDateTime;
@@ -20,4 +20,9 @@ public interface OperationMapper {
 
     @Delete("delete from operation where OID = #{OID} and Otype IN (1, 2)")
     void DeleteOperation(@Param("OID") Integer oID);
+
+    @Insert("insert into operation (GID,UserID,Otype) values (#{gid},#{userid},#{otype})")
+    void InsertNewOperation(@Param("gid") int gid, @Param("userid") String userid,@Param("otype") int otype);
+
+
 }

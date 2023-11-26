@@ -68,4 +68,13 @@ public class GoodsServiceImpl implements GoodsService {
         return errand.getGID();
     }
 
+    @Override
+    public Optional<ArrayList<Good>> getSomeonesSellingGoods(String uid) {
+        ArrayList<Good> goods=goodsMapper.getSomeonesSellingGoods(uid);
+        goods.forEach((e)->{
+            e.setGoodsImageList(goodsMapper.getFirstImage(e.getGID()));
+        });
+        return Optional.of(goods);
+    }
+
 }

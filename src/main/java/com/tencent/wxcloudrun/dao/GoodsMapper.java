@@ -31,4 +31,10 @@ public interface GoodsMapper {
 
     @Insert("insert into errand (GID, deadline) values (#{GID}, #{deadline})")
     void insertErrand(Errand errand);
+
+    @Select("select * from goods where UID = #{uid} and Status = 1")
+    ArrayList<Good> getSomeonesSellingGoods(@Param("uid") String uid);
+
+    @Select("select * from goods_image where g_id = #{g_id} and i_order=1")
+    ArrayList<GoodsImage> getFirstImage(@Param("g_id") int gid);
 }

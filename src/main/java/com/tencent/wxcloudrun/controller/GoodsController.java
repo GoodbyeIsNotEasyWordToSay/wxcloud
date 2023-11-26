@@ -7,22 +7,23 @@ import com.tencent.wxcloudrun.model.Good;
 import com.tencent.wxcloudrun.model.IdleItem;
 import com.tencent.wxcloudrun.service.GoodsService;
 import com.tencent.wxcloudrun.config.ApiResponse;
-import com.tencent.wxcloudrun.service.LoginService;
+import com.tencent.wxcloudrun.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
 public class GoodsController {
 
     final GoodsService goodsService;
-    final LoginService loginService;
+    final UserService loginService;
     final Logger logger;
 
-    public GoodsController(@Autowired GoodsService goodsService, @Autowired LoginService loginService) {
+    public GoodsController(@Autowired GoodsService goodsService, @Autowired UserService loginService) {
         this.goodsService = goodsService;
         this.loginService = loginService;
         this.logger = LoggerFactory.getLogger(CounterController.class);
@@ -86,5 +87,15 @@ public class GoodsController {
         logger.info("/api/goods/test POST request");
         logger.info(jsonString);
         return ApiResponse.ok();
+    }
+
+    @GetMapping("/api/goods/getones/{uid}")
+    ApiResponse getOnesSellingGoods(@PathVariable String uid){
+        Optional<ArrayList<Good>> goods=goodsService.getSomeonesSellingGoods(uid);
+        if (goods.isPresent()) {
+            return ApiResponse.ok(goods);
+        } else {
+            return ApiResponse.error("");
+        }
     }
 }
