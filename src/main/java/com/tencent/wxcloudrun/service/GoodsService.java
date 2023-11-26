@@ -18,6 +18,10 @@ public interface GoodsService {
     Optional<ArrayList<Good>> getSomeonesSellingGoods(String uid);
 
     void modifyGood(Good good);
+
+
+    void deleteGood(Integer gid, String openid);
+
     int setGoodSold(int gid);
 
 }
