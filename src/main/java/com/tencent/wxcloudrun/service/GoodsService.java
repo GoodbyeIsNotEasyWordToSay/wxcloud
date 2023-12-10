@@ -22,6 +22,6 @@ public interface GoodsService {
 
     void deleteGood(Integer gid, String openid);
 
-    int setGoodSold(int gid);
+    int setGoodSold(String sellerID,String buyerID,int gid);
 
 }

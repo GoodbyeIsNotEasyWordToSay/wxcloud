@@ -149,9 +149,9 @@ public class GoodsController {
             return ApiResponse.error("");
         }
     }
-    @GetMapping("/api/goods/saleconfirm/{gid}")
-    ApiResponse saleConfirm(@PathVariable int gid){
-        int result=goodsService.setGoodSold(gid);
+    @GetMapping("/api/goods/saleconfirm/{sellerid}/{buyerid}/{gid}")
+    ApiResponse saleConfirm(@PathVariable String sellerid,@PathVariable String buyerid,@PathVariable int gid){
+        int result=goodsService.setGoodSold(sellerid,buyerid,gid);
         if(result == 1){
             return ApiResponse.ok("操作成功");
         }
