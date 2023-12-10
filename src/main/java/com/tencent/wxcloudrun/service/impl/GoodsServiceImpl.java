@@ -1,5 +1,6 @@
 package com.tencent.wxcloudrun.service.impl;
 
+import com.tencent.wxcloudrun.dao.DealMapper;
 import com.tencent.wxcloudrun.dao.GoodsMapper;
 import com.tencent.wxcloudrun.dao.ImageMapper;
 import com.tencent.wxcloudrun.model.Errand;
@@ -20,11 +21,13 @@ public class GoodsServiceImpl implements GoodsService {
     final GoodsMapper goodsMapper;
     final ImageMapper imageMapper;
     final ImageService imageService;
+    final DealMapper dealMapper;
 
-    public GoodsServiceImpl(@Autowired GoodsMapper goodsMapper, @Autowired ImageMapper imageMapper, @Autowired ImageService imageService) {
+    public GoodsServiceImpl(@Autowired GoodsMapper goodsMapper, @Autowired ImageMapper imageMapper, @Autowired ImageService imageService,@Autowired DealMapper dealMapper) {
         this.goodsMapper = goodsMapper;
         this.imageMapper = imageMapper;
         this.imageService = imageService;
+        this.dealMapper = dealMapper;
     }
 
     @Override
@@ -128,8 +131,16 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public int setGoodSold(int gid) {
+    public int setGoodSold(String sellerID,String buyerID,int gid) {
         goodsMapper.setGoodSold(gid);
+        dealMapper.insertDeal(gid,buyerID,sellerID);
+        int category=goodsMapper.getCategory(gid);
+        if (category==0){
+            goodsMapper.endGood("idle_item",gid);
+        }else {
+            goodsMapper.endGood("errand",gid);
+        }
+
         return 1;
 
     }
